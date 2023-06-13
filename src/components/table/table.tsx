@@ -39,6 +39,7 @@ const Table: React.FC<TableProps> = ({ data, columns }) => {
             </tr>
           ))}
         </thead>
+
         <tbody>
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>

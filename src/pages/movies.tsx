@@ -4,6 +4,7 @@ import { LogoutButton } from '../components/logoutButton';
 import { Table } from '../components/table';
 import { SearchBar } from '../components/searchBar';
 import MoviesStateContext from '../contexts/moviesStateContext';
+import IMovie from '../types/IMovie';
 
 const columns = [
   {
@@ -33,9 +34,11 @@ const columns = [
 ];
 
 const Movies = () => {
-  // get movies from context
   const { state } = useContext(MoviesStateContext);
-  console.log({ movies_in_movies_page: state });
+
+  const handleRowClick = (row: IMovie) => {
+    console.log(`Row clicked: ${row.id}`);
+  };
 
   return (
     <>
@@ -51,7 +54,11 @@ const Movies = () => {
       </div>
       <SearchBar />
       {state.movies && state.movies.length && state.movies.length > 0 ? (
-        <Table data={state.movies} columns={columns} />
+        <Table
+          data={state.movies}
+          columns={columns}
+          handleRowClick={handleRowClick}
+        />
       ) : (
         <div>No movies found</div>
       )}

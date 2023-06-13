@@ -11,9 +11,10 @@ import IMovie from '../../types/IMovie';
 interface TableProps {
   data: Array<IMovie>;
   columns: Array<{ header: string; accessorKey: string }>;
+  handleRowClick: (row: IMovie) => void;
 }
 
-const Table: React.FC<TableProps> = ({ data, columns }) => {
+const Table: React.FC<TableProps> = ({ data, columns, handleRowClick }) => {
   const table = useReactTable({
     data,
     columns,
@@ -42,7 +43,7 @@ const Table: React.FC<TableProps> = ({ data, columns }) => {
 
         <tbody>
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
+            <tr key={row.id} onClick={() => handleRowClick(row.original)}>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -51,22 +52,6 @@ const Table: React.FC<TableProps> = ({ data, columns }) => {
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map(header => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
       </table>
       <div className="h-4" />
     </div>

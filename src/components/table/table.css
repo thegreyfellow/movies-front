@@ -17,10 +17,24 @@ th {
   padding: 2px 4px;
 }
 
-tfoot {
-  color: gray;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-tfoot th {
-  font-weight: normal;
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr {
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: #ddd;
 }

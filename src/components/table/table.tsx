@@ -1,5 +1,4 @@
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -11,32 +10,10 @@ import IMovie from '../../types/IMovie';
 
 interface TableProps {
   data: Array<IMovie>;
+  columns: Array<{ header: string; accessorKey: string }>;
 }
 
-const columnHelper = createColumnHelper<IMovie>();
-
-const columns = [
-  columnHelper.accessor('Title', {
-    cell: info => info.getValue(),
-  }),
-  columnHelper.accessor('Release Date', {
-    cell: info => info.getValue(),
-  }),
-  columnHelper.accessor('Director', {
-    cell: info => info.getValue(),
-  }),
-  columnHelper.accessor('Rotten Tomatoes Rating', {
-    cell: info => info.getValue(),
-  }),
-  columnHelper.accessor('IMDB Rating', {
-    cell: info => info.getValue(),
-  }),
-  columnHelper.accessor('IMDB Votes', {
-    cell: info => info.getValue(),
-  }),
-];
-
-const Table: React.FC<TableProps> = ({ data }) => {
+const Table: React.FC<TableProps> = ({ data, columns }) => {
   const table = useReactTable({
     data,
     columns,

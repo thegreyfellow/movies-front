@@ -7,6 +7,33 @@ const Movies = () => {
   const { data, error } = useMovies();
   console.log({ data, error });
 
+  const columns = [
+    {
+      header: 'Title',
+      accessorKey: 'Title',
+    },
+    {
+      header: 'Release Date',
+      accessorKey: 'Release Date',
+    },
+    {
+      header: 'Director',
+      accessorKey: 'Director',
+    },
+    {
+      header: 'Rotten Tomatoes Rating',
+      accessorKey: 'Rotten Tomatoes Rating',
+    },
+    {
+      header: 'IMDB Rating',
+      accessorKey: 'IMDB Rating',
+    },
+    {
+      header: 'IMDB Votes',
+      accessorKey: 'IMDB Votes',
+    },
+  ];
+
   return (
     <div>
       <div
@@ -20,7 +47,7 @@ const Movies = () => {
         <LogoutButton />
       </div>
       {/* <SearchBar /> */}
-      {data && <Table data={data as Array<IMovie>} />}
+      {data && <Table data={data as Array<IMovie>} columns={columns} />}
     </div>
   );
 };

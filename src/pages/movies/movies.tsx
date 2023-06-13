@@ -45,7 +45,6 @@ const Movies = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRowClick = (movie: IMovie) => {
-    console.log(`Row clicked: ${movie.id}`);
     setState({ type: 'set_selected_movie', payload: { movie } });
     setIsModalOpen(true);
   };

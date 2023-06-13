@@ -2,7 +2,6 @@ import useSWR from 'swr';
 
 import { REACT_APP_API_URL } from '../utility/constants';
 import IMovie from '../types/IMovie';
-import IError from '../types/IError';
 
 const fetcher = async (url: string): Promise<IMovie[]> => {
   const response = await fetch(url, {

@@ -9,7 +9,7 @@ interface IMoviesStateContext {
 }
 
 const MoviesStateContext = createContext<IMoviesStateContext>({
-  state: { movies: [], selectedMovie: null, error: null },
+  state: { movies: [], selectedMovie: null, sortBy: null, error: null },
 });
 
 export default MoviesStateContext;

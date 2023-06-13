@@ -11,7 +11,6 @@ export const SearchBar: React.FC = () => {
   const { setState } = useContext(MoviesDispatchContext);
   useEffect(() => {
     if (movies && movies?.length > 0) {
-      console.log({ movies_searchbar: movies });
       setState({ type: 'set_movies', payload: { movies } });
     }
   }, [movies, setState]);

@@ -1,6 +1,5 @@
 export const SearchButton: React.FC = () => {
   const handleSearchButton = () => {
-    console.log('Search button clicked');
     // FIXME: Implement search button
   };
 

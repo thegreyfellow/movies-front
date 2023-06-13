@@ -8,10 +8,7 @@ const moviesReducer = (state: IState, action: IMoviesReducerAction) => {
 
   switch (action.type) {
     case 'set_movies':
-      // eslint-disable-next-line no-case-declarations
-      const newState = { ...state, movies: action.payload?.movies };
-      console.log('newState', newState);
-      return newState;
+      return { ...state, movies: action.payload?.movies };
     case 'set_selected_movie':
       return { ...state, selectedMovie: action.payload?.movie };
     case 'fetch_error':

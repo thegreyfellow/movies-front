@@ -22,7 +22,7 @@ const Table: React.FC<TableProps> = ({ data, columns, handleRowClick }) => {
   });
 
   return (
-    <div className="p-2">
+    <div className="table">
       <table>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
@@ -53,7 +53,7 @@ const Table: React.FC<TableProps> = ({ data, columns, handleRowClick }) => {
           ))}
         </tbody>
       </table>
-      <div className="h-4" />
+      <div />
     </div>
   );
 };

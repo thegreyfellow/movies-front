@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useAuth from '../hooks/useAuth';
-
 import Movies from '../pages/movies/movies';
 import MoviesProvider from '../providers/MoviesProvider';
+
+import './root.css';
 
 const Root: React.FC = () => {
   const { isAuthenticated } = useAuth();

@@ -10,7 +10,6 @@ const Root: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log({ isAuthenticated });
     if (!isAuthenticated) {
       navigate('/login');
     }

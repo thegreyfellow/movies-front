@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const REACT_APP_API_URL = 'http://localhost:3000';
+import { REACT_APP_API_URL } from '../utility/constants';
 
 const useAuth = () => {
   const [isAuthenticated, setisAuthenticated] = useState<boolean>(

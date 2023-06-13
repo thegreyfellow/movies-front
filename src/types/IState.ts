@@ -1,14 +1,14 @@
 import IMovie from './IMovie';
 
 export default interface IState {
-  movies: IMovie[] | [] | undefined;
-  selectedMovie?: IMovie | null | undefined;
+  movies: IMovie[] | [];
+  viewedMovies: IMovie[] | [];
+  selectedMovie: IMovie | null;
   sortBy?:
     | 'Title'
     | 'IMDB Rating'
     | 'IMDB Votes'
     | 'Rotten Tomatoes Rating'
-    | null
-    | undefined;
-  error?: string | null | undefined;
+    | null;
+  error?: string | null;
 }

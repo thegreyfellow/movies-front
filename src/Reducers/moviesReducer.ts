@@ -9,6 +9,17 @@ const moviesReducer = (state: IState, action: IMoviesReducerAction) => {
   switch (action.type) {
     case 'set_movies':
       return { ...state, movies: action.payload?.movies };
+    case 'set_viewed_movies':
+      // filter out duplicates
+      return {
+        ...state,
+        viewedMovies: [
+          ...new Set([
+            ...state.viewedMovies,
+            ...(action.payload?.viewedMovies || []),
+          ]),
+        ],
+      };
     case 'set_selected_movie':
       return { ...state, selectedMovie: action.payload?.movie };
     case 'set_sort_by':

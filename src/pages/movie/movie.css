@@ -1,5 +1,3 @@
-/* add styles to Movie component in movie.css */
-
 .movie-container {
   display: flex;
   flex-direction: column;
@@ -46,7 +44,6 @@
   width: 100%;
   max-width: 150px;
   height: auto;
-  margin: 0 0 20px 0;
 }
 
 .movie-container h3 {

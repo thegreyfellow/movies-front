@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Root from './layouts/root';
-import Movies from './pages/movies/movies';
 import Login from './pages/login/login';
+import Movies from './pages/movies/movies';
 
 const router = createBrowserRouter([
   {
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <Root />, // all routes under <Root /> will be protected
     children: [
       {
-        path: '/movies',
+        path: '/',
         element: <Movies />,
       },
     ],

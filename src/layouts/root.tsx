@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import useAuth from '../hooks/useAuth';
-import Movies from '../pages/movies/movies';
 import MoviesProvider from '../providers/MoviesProvider';
 
 import './root.css';
@@ -19,7 +18,7 @@ const Root: React.FC = () => {
 
   return (
     <MoviesProvider>
-      {isAuthenticated ? <Movies /> : <div>Redirecting to login page...</div>}
+      {isAuthenticated ? <Outlet /> : <div>Redirecting to login page...</div>}
     </MoviesProvider>
   );
 };

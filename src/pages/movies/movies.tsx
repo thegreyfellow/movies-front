@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import MoviesStateContext from '../../contexts/moviesStateContext';
 import MoviesDispatchContext from '../../contexts/moviesDispatchContext';
@@ -7,10 +8,11 @@ import IMovie from '../../types/IMovie';
 import { LogoutButton } from '../../components/logoutButton';
 import { Table } from '../../components/table';
 import { SearchBar } from '../../components/searchBar';
-import Movie from '../movie/movie';
 import { SortingSelect } from '../../components/sortingSelect';
+import Movie from '../movie/movie';
 
 import './movies.css';
+import ViewedMovies from '../../components/viewedMovies/viewedMovies';
 
 const columns = [
   {
@@ -43,9 +45,11 @@ const Movies = () => {
   const { state } = useContext(MoviesStateContext);
   const { setState } = useContext(MoviesDispatchContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleRowClick = (movie: IMovie) => {
     setState({ type: 'set_selected_movie', payload: { movie } });
+    setState({ type: 'set_viewed_movies', payload: { viewedMovies: [movie] } });
     setIsModalOpen(true);
   };
 
@@ -54,48 +58,57 @@ const Movies = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <h1 className="title">Movies</h1>
+    <div className="main-container">
+      <ViewedMovies setIsModalOpen={setIsModalOpen} />
+      <div className="movies-container">
+        <div className="header">
+          <h1 className="title">Movies</h1>
 
-        <div className="search-sort">
-          <SearchBar />
-          <SortingSelect />
+          <div className="search-sort">
+            <button
+              className="history-button"
+              onClick={() => navigate('history')}
+            >
+              History
+            </button>
+            <SearchBar />
+            <SortingSelect />
+          </div>
+
+          <div className="logout-button">
+            <LogoutButton />
+          </div>
         </div>
 
-        <div className="logout-button">
-          <LogoutButton />
-        </div>
+        {state.movies && state.movies.length && state.movies.length > 0 ? (
+          <Table
+            data={state.movies}
+            columns={columns}
+            handleRowClick={handleRowClick}
+          />
+        ) : (
+          <div>No movies found</div>
+        )}
+
+        {isModalOpen && (
+          <div
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              width: '100vw',
+              height: '100vh',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Movie onClose={closeModal} />
+          </div>
+        )}
       </div>
-
-      {state.movies && state.movies.length && state.movies.length > 0 ? (
-        <Table
-          data={state.movies}
-          columns={columns}
-          handleRowClick={handleRowClick}
-        />
-      ) : (
-        <div>No movies found</div>
-      )}
-
-      {isModalOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            width: '100vw',
-            height: '100vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Movie onClose={closeModal} />
-        </div>
-      )}
     </div>
   );
 };

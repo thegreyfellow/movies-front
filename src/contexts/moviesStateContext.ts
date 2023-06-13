@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext } from 'react';
 
 import IState from '../types/IState';
@@ -9,7 +7,13 @@ interface IMoviesStateContext {
 }
 
 const MoviesStateContext = createContext<IMoviesStateContext>({
-  state: { movies: [], selectedMovie: null, sortBy: 'Title', error: null },
+  state: {
+    movies: [],
+    viewedMovies: [],
+    selectedMovie: null,
+    sortBy: 'Title',
+    error: null,
+  },
 });
 
 export default MoviesStateContext;

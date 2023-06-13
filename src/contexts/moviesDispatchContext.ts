@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext } from 'react';
 
 import IMoviesReducerAction from '../types/IMoviesReducerAction';
@@ -9,6 +7,7 @@ interface IMoviesDispatchContext {
 }
 
 const MoviesDispatchContext = createContext<IMoviesDispatchContext>({
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setState: () => {},
 });
 

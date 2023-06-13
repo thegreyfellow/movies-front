@@ -41,7 +41,7 @@ const Movie: React.FC<MovieProps> = ({ onClose }) => {
       </div>
       {movie ? (
         <div>
-          <h2>{movie.Title}</h2>
+          <h2>{`${movie.Title} (${movie['Release Date']})`}</h2>
 
           <div className="movie-img-and-data">
             <img

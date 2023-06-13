@@ -12,8 +12,13 @@ interface MoviesProviderProps {
   children: React.ReactNode;
 }
 
-const initialState: { movies: Array<IMovie>; selectedMovie: IMovie | null } = {
+const initialState: {
+  movies: IMovie[];
+  viewedMovies: IMovie[];
+  selectedMovie: IMovie | null;
+} = {
   movies: [],
+  viewedMovies: [],
   selectedMovie: null,
 };
 

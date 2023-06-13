@@ -1,6 +1,13 @@
-/* write css for the page movies in movies.css */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
 
-.container {
+.movies-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,5 +29,9 @@
 .search-sort {
   display: flex;
   flex-direction: row;
+  margin: 0 20px;
+}
+
+.history-button {
   margin: 0 20px;
 }

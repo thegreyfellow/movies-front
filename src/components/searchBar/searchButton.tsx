@@ -1,6 +1,6 @@
 export const SearchButton: React.FC = () => {
   const handleSearchButton = () => {
-    // FIXME: Implement search button
+    // TODO: Implement search button
   };
 
   return (

@@ -4,8 +4,6 @@ import './movie.css';
 
 import MoviesStateContext from '../../contexts/moviesStateContext';
 
-const REACT_APP_IMG_API_KEY = '863d2690';
-
 interface MovieProps {
   onClose: () => void;
 }

@@ -1,12 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
+
+import MoviesStateContext from '../../contexts/moviesStateContext';
+import MoviesDispatchContext from '../../contexts/moviesDispatchContext';
+import IMovie from '../../types/IMovie';
 
 import { LogoutButton } from '../../components/logoutButton';
 import { Table } from '../../components/table';
 import { SearchBar } from '../../components/searchBar';
-import MoviesStateContext from '../../contexts/moviesStateContext';
-import IMovie from '../../types/IMovie';
-import MoviesDispatchContext from '../../contexts/moviesDispatchContext';
 import Movie from '../movie/movie';
+import { SortingSelect } from '../../components/sortingSelect';
+
 import './movies.css';
 
 const columns = [
@@ -56,8 +59,9 @@ const Movies = () => {
       <div className="header">
         <h1 className="title">Movies</h1>
 
-        <div className="search-bar">
+        <div className="search-sort">
           <SearchBar />
+          <SortingSelect />
         </div>
 
         <div className="logout-button">

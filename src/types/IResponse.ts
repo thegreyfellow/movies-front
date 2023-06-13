@@ -1,9 +1,6 @@
-export default interface IResponse {
-  [key: string]:
-    | string
-    | number
-    | boolean
-    | IResponse
-    | Array<IResponse>
-    | null;
-}
+import IMovie from './IMovie';
+import IError from './IError';
+
+type IResponse = Array<IMovie> | IMovie | IError;
+
+export default IResponse;

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useAuth from '../hooks/useAuth';
 
-import Movies from '../pages/movies';
+import Movies from '../pages/movies/movies';
 import MoviesProvider from '../providers/MoviesProvider';
 
 const Root: React.FC = () => {

@@ -8,7 +8,7 @@ const data = [
 ] as IMovie[];
 
 const columns = [
-  { header: 'Title', accessorKey: 'title' },
+  { header: 'Title', accessorKey: 'Title' },
   { header: 'Release Date', accessorKey: 'Release Date' },
 ];
 
@@ -40,6 +40,7 @@ describe.only('Table', () => {
     const firstDataCells = firstDataRow.querySelectorAll('td');
 
     expect(firstDataCells.length).toBe(2);
+    console.log(firstDataCells[0]);
     expect(firstDataCells[0].textContent).toBe('Movie 1');
     expect(firstDataCells[1].textContent).toBe('2020-01-01');
 

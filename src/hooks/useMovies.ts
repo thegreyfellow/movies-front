@@ -14,7 +14,7 @@ const fetcher = async (url: string): Promise<IMovie[]> => {
 
   if (!response.ok) {
     if (response.status === 401 || response.status === 403) {
-      // FIXME: can't call hooks in here, and need to logout user when this happens
+      // FIXME: can't call hooks in here, and need to logout user
       localStorage.removeItem('token');
     } else {
       // TODO: show toast with error message

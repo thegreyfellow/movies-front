@@ -16,6 +16,7 @@ const SortingSelect: React.FC = () => {
 
   return (
     <select
+      role="sorting-select"
       className="sorting-container"
       value={state.sortBy || 'default'}
       onChange={handleSelectChange}
@@ -25,7 +26,7 @@ const SortingSelect: React.FC = () => {
       </option>
       {SORTING_OPTIONS.map(sortKey => {
         return (
-          <option key={sortKey} value={sortKey}>
+          <option role={sortKey} key={sortKey} value={sortKey}>
             sort by {sortKey}
           </option>
         );

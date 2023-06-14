@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import MoviesStateContext from '../../contexts/moviesStateContext';
 import MoviesDispatchContext from '../../contexts/moviesDispatchContext';
@@ -45,7 +44,6 @@ const Movies = () => {
   const { state } = useContext(MoviesStateContext);
   const { setState } = useContext(MoviesDispatchContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleRowClick = (movie: IMovie) => {
     setState({ type: 'set_selected_movie', payload: { movie } });
@@ -65,12 +63,6 @@ const Movies = () => {
           <h1 className="title">Movies</h1>
 
           <div className="search-sort">
-            <button
-              className="history-button"
-              onClick={() => navigate('history')}
-            >
-              History
-            </button>
             <SearchBar />
             <SortingSelect />
           </div>

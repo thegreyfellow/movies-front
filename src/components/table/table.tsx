@@ -4,7 +4,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-// import './table.css';
+import './table.css';
 
 import IMovie from '../../types/IMovie';
 

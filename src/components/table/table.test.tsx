@@ -14,7 +14,7 @@ const columns = [
 
 const handleRowClick = jest.fn();
 
-describe.only('Table', () => {
+describe('Table', () => {
   test('renders the table with correct data', () => {
     render(
       <Table data={data} columns={columns} handleRowClick={handleRowClick} />
@@ -40,7 +40,6 @@ describe.only('Table', () => {
     const firstDataCells = firstDataRow.querySelectorAll('td');
 
     expect(firstDataCells.length).toBe(2);
-    console.log(firstDataCells[0]);
     expect(firstDataCells[0].textContent).toBe('Movie 1');
     expect(firstDataCells[1].textContent).toBe('2020-01-01');
 

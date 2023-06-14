@@ -1,6 +1,7 @@
 export const SearchButton: React.FC = () => {
   const handleSearchButton = () => {
     // TODO: Implement search button
+    console.log('handling the search button');
   };
 
   return (

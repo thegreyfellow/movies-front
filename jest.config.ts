@@ -14,7 +14,7 @@ module.exports = {
     ],
   },
   moduleNameMapper: {
-    '\\./(css)$': 'identity-obj-proxy',
+    '\\.(css)$': 'identity-obj-proxy',
   },
   resolver: 'jest-ts-webcompat-resolver',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],

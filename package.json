@@ -10,6 +10,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "test": "jest",
+    "coverage": "jest --coverage",
     "test:watch": "jest --watchAll"
   },
   "dependencies": {

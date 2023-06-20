@@ -45,9 +45,14 @@ const Movies = () => {
   const { setState } = useContext(MoviesDispatchContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleRowClick = (movie: IMovie) => {
+  const handleClick = (movie: IMovie) => {
     setState({ type: 'set_selected_movie', payload: { movie } });
-    setState({ type: 'set_viewed_movies', payload: { viewedMovies: [movie] } });
+    if (state && !state.viewedMovies.find((m: IMovie) => m.id === movie.id)) {
+        setState({
+          type: 'set_viewed_movies',
+          payload: { viewedMovies: [...state.viewedMovies, movie] },
+        });
+      }
     setIsModalOpen(true);
   };
 
@@ -57,7 +62,7 @@ const Movies = () => {
 
   return (
     <div className="main-container">
-      <ViewedMovies setIsModalOpen={setIsModalOpen} />
+      <ViewedMovies handleClick={handleClick} movies={state.viewedMovies} />
       <div className="movies-container">
         <div className="header">
           <h1 className="title">Movies</h1>
@@ -76,7 +81,7 @@ const Movies = () => {
           <Table
             data={state.movies}
             columns={columns}
-            handleRowClick={handleRowClick}
+            handleRowClick={handleClick}
           />
         ) : (
           <div>No movies found</div>

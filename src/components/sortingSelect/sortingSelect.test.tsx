@@ -1,38 +1,10 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import SortingSelect from './sortingSelect';
 
 jest.mock('../../contexts/moviesDispatchContext');
 jest.mock('../../contexts/moviesStateContext');
-jest.mock('./sortingSelect.css', () => ({}));
 
 describe('SortingSelect', () => {
-  test.skip('calls setState with the selected sorting option', () => {
-    const setStateMock = jest.fn();
-    const stateMock = { sortBy: 'Title' };
-    jest.mock('../../contexts/moviesDispatchContext', () => ({
-      default: {
-        setState: setStateMock,
-      },
-    }));
-    jest.mock('../../contexts/moviesStateContext', () => ({
-      default: {
-        state: stateMock,
-      },
-    }));
-
-    render(<SortingSelect />);
-
-    const selectElement = screen.getByRole('sorting-select');
-    fireEvent.change(selectElement, {
-      target: { value: 'Rotten Tomatoes Rating' },
-    });
-
-    expect(setStateMock).toHaveBeenCalledWith({
-      type: 'set_sort_by',
-      payload: { sortBy: 'Rotten Tomatoes Rating' },
-    });
-  });
-
   test('displays the current sorting option', () => {
     const stateMock = { sortBy: 'Rotten Tomatoes Rating' };
     jest.mock('../../contexts/moviesStateContext', () => ({
@@ -70,7 +42,5 @@ describe('SortingSelect', () => {
 
     expect(options[1].value).toBe('Title');
     expect(options[1].textContent).toBe('sort by Title');
-
-    // Add assertions for other options if needed
   });
 });

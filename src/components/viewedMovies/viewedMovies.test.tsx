@@ -1,102 +1,58 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import MoviesStateContext from '../../contexts/moviesStateContext';
-import moviesReducer from '../../Reducers/moviesReducer';
+import { render } from '@testing-library/react';
 import ViewedMovies from './viewedMovies';
-
-const mockSetIsModalOpen = jest.fn();
-const mockSetState = jest.fn();
-
-const mockState = {
-  movies: [],
-  selectedMovie: null,
-  viewedMovies: [
-    { id: 1, Title: 'Movie 1' },
-    { id: 2, Title: 'Movie 2' },
-  ],
-};
-
-const MockMoviesStateContextProvider = MoviesStateContext.Provider;
-
-jest.mock('../../contexts/moviesStateContext', () => ({
-  __esModule: true,
-  MoviesStateContext: {
-    Provider: ({ children }: { children: React.ReactNode }) => (
-      <MockMoviesStateContextProvider value={{ state: mockState }}>
-        {children}
-      </MockMoviesStateContextProvider>
-    ),
-  },
-}));
-
-jest.mock('../../contexts/moviesStateContext', () => {
-  return () => ({
-    default: {
-      useContext: jest.fn().mockReturnValue({ state: mockState }),
-    },
-  });
-});
-
-jest.mock('../../contexts/moviesDispatchContext', () => {
-  return () => ({
-    default: {
-      useContext: jest.fn().mockReturnValue({ setState: mockSetState }),
-    },
-  });
-});
-
-jest.mock('../../providers/MoviesProvider', () => {
-  return () => ({
-    default: jest.fn().mockReturnValue(<div>Mock MoviesProvider</div>),
-  });
-});
-
-jest.mock('../../Reducers/moviesReducer', () => {
-  return jest.fn();
-});
+import IMovie from '../../types/IMovie';
 
 describe('ViewedMovies', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
+  test('should render a heading', () => {
+    const { getByRole } = render(
+      <ViewedMovies handleClick={jest.fn()} movies={[]} />
+    );
+    const heading = getByRole('heading', { name: /viewed movies/i });
+    expect(heading).toBeInTheDocument;
   });
 
-  test.skip('renders "No movies viewed yet" message when there are no viewed movies', () => {
-    const emptyState = { viewedMovies: [], movies: [], selectedMovie: null };
-    render(
-      <MockMoviesStateContextProvider value={{ state: emptyState }}>
-        <ViewedMovies setIsModalOpen={mockSetIsModalOpen} />
-      </MockMoviesStateContextProvider>
+  test('should render list of movies', () => {
+    const movies: IMovie[] = [
+      { id: 1, Title: 'Movie 1' },
+      { id: 2, Title: 'Movie 2' },
+      { id: 3, Title: 'Movie 3' },
+    ];
+
+    const { getByRole } = render(
+      // mock handleClick
+      <ViewedMovies handleClick={jest.fn()} movies={movies} />
+    );
+    const list = getByRole('list');
+
+    expect(list).toBeInTheDocument;
+    expect(list.children.length).toBe(3);
+  });
+
+  test('should render a message if no movies are passed or the list is empty', () => {
+    const { getByText } = render(
+      <ViewedMovies handleClick={() => {}} movies={[]} />
+    );
+    const message = getByText(/no movies viewed yet/i);
+
+    expect(message).toBeInTheDocument;
+  });
+
+  test('should call handleClick when a movie is clicked', () => {
+    const movies: IMovie[] = [
+      { id: 1, Title: 'Movie 1' },
+      { id: 2, Title: 'Movie 2' },
+      { id: 3, Title: 'Movie 3' },
+    ];
+
+    const handleClick = jest.fn();
+
+    const { getByText } = render(
+      <ViewedMovies handleClick={handleClick} movies={movies} />
     );
 
-    const messageElement = screen.getByText('No movies viewed yet.');
-    expect(messageElement).toBeInTheDocument();
-  });
+    const movie = getByText(/movie 1/i);
+    movie.click();
 
-  test.skip('renders the viewed movies list', () => {
-    (moviesReducer as jest.Mock).mockReturnValue(mockState);
-    render(
-      <MoviesStateContext.Provider value={{ state: mockState }}>
-        <ViewedMovies setIsModalOpen={mockSetIsModalOpen} />
-      </MoviesStateContext.Provider>
-    );
-    const movieLinks = screen.getAllByRole('link');
-    expect(movieLinks.length).toBe(2);
-    expect(movieLinks[0].textContent).toBe('Movie 1');
-    expect(movieLinks[1].textContent).toBe('Movie 2');
-  });
-
-  test.skip('calls handleClick when a movie link is clicked', () => {
-    render(<ViewedMovies setIsModalOpen={mockSetIsModalOpen} />);
-
-    const movieLink = screen.getAllByRole('link')[0];
-    fireEvent.click(movieLink);
-
-    expect(mockSetState).toHaveBeenCalledTimes(1);
-    expect(mockSetState).toHaveBeenCalledWith({
-      type: 'set_selected_movie',
-      payload: { movie: mockState.viewedMovies[0] },
-    });
-
-    expect(mockSetIsModalOpen).toHaveBeenCalledTimes(1);
-    expect(mockSetIsModalOpen).toHaveBeenCalledWith(true);
+    expect(handleClick).toHaveBeenCalled();
   });
 });
